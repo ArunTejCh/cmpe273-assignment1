@@ -1,10 +1,11 @@
 from flask import Flask
 import urllib2
 import sys
-
+import json
+import base64
 
 githubUrl = str(sys.argv[1])
-githubUrl = githubUrl.replace('github.com','raw.github.com') + '/master/'
+githubUrl = githubUrl.replace('github.com','api.github.com/repos') + '/contents/'
 print 'Github Url:'+ githubUrl
 app = Flask(__name__)
 
@@ -18,7 +19,8 @@ def hello():
 def github1(fileName):
     response = urllib2.urlopen(githubUrl + fileName)
     html = response.read()
-    return html
+    j = json.loads(html)
+    return base64.b64decode(j['content'])
 
 
 @app.route("/v2/")
