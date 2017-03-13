@@ -1,4 +1,4 @@
-FROM python:2.7.13
+FROM python:2.7.12
 MAINTAINER Your Name "aruntejbombay@gmail.com"
 COPY . /app
 WORKDIR /app
